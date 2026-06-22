@@ -1,14 +1,49 @@
 def language_instruction(language: str) -> str:
     if language == "az":
         return (
-            "\n\nLANGUAGE REQUIREMENT:\n"
-            "Write the entire response in natural, fluent Azerbaijani. "
-            "Use Azerbaijani vocabulary and grammar throughout, including the "
-            "call to action. Do not write the ad copy in English."
+            "\n\nCRITICAL LANGUAGE REQUIREMENT:\n"
+            "Write exclusively in flawless, natural Azerbaijani. "
+            "Do not use Turkish words or Turkish grammar structures. "
+            "Use 'ilə', not 'ile' or 'yla/ylə'; 'deyil', not 'değil'; "
+            "'çünki', not 'çünkü'; and 'həm...həm də', not 'hem...hem de'. "
+            "Avoid words that exist in Turkish but not in Azerbaijani. "
+            "Write like a real person speaks, never formally or robotically."
         )
     return (
-        "\n\nLANGUAGE REQUIREMENT:\n"
-        "Write the entire response in natural, fluent English."
+        "\n\nCRITICAL LANGUAGE REQUIREMENT:\n"
+        "Write exclusively in natural, fluent English. "
+        "Do not include Azerbaijani or Turkish words unless they are part of "
+        "the business name or product name supplied by the user."
+    )
+
+
+def facebook_language_examples(language: str) -> str:
+    if language == "az":
+        return (
+            '- NO negative questions ("İstəməzsinizmi?") — they repel customers\n'
+            "- NEVER use any negative construction in any sentence\n"
+            '- Replace "qaçırmaq istəməzsiniz" style phrases with positive FOMO:\n'
+            '  "Bu yazın ən gözəl seçimi artıq burada."'
+        )
+    return (
+        '- NO negative questions ("Wouldn’t you want...?") — they repel customers\n'
+        "- NEVER use any negative construction in any sentence\n"
+        '- Replace "you do not want to miss this" style phrases with positive FOMO:\n'
+        '  "This season’s most exciting choice is already here."'
+    )
+
+
+def tiktok_format_examples(language: str) -> str:
+    if language == "az":
+        return (
+            '  * POV hekayəsi: "POV: bu paltarı geyindim və..."\n'
+            '  * Şok etiraf: "Bunu geyindim, heç kim məni tanımadı"\n'
+            '  * Gözlənilməz nəticə: "Hamı məndən soruşdu haradan aldım"'
+        )
+    return (
+        '  * POV story: "POV: I tried this and..."\n'
+        '  * Shocking confession: "I wore this and nobody recognized me"\n'
+        '  * Unexpected result: "Everyone asked me where I got it"'
     )
 
 
@@ -17,17 +52,7 @@ def instagram_prompt(
 ) -> tuple[str, str]:
     system = """You are an award-winning Instagram copywriter who has grown brands from 0 to 1M followers.
 You write captions that stop the scroll, spark emotion, and drive real engagement.
-Your style is warm, human, and culturally aware. You use emojis as punctuation, not decoration.
-
-CRITICAL: Write exclusively in flawless Azerbaijani language.
-Do NOT use Turkish words or Turkish grammar structures.
-Azerbaijani-specific rules:
-- Use 'ilə' not 'ile' or 'yla/ylə'
-- Use 'deyil' not 'değil'
-- Use 'çünki' not 'çünkü'
-- Use 'həm...həm də' not 'hem...hem de'
-- Avoid any word that exists in Turkish but not in Azerbaijani
-- Natural, spoken Azerbaijani — not formal or robotic"""
+Your style is warm, human, and culturally aware. You use emojis as punctuation, not decoration."""
 
     user = f"""Write an Instagram caption for "{business_name}" promoting "{product}".
 
@@ -42,7 +67,7 @@ Rules:
 - Do NOT use generic phrases like "Check this out!" or "Don't miss out!"
 - Make it feel like a real person wrote it, not a marketing bot"""
 
-    return system, user + language_instruction(language)
+    return system + language_instruction(language), user
 
 
 def facebook_prompt(
@@ -75,16 +100,12 @@ Follow this exact structure — but write it as ONE flowing piece, no labels:
 Rules:
 - Zero corporate language
 - Zero clichés ("Don't miss out", "Limited time", "Check this out")
-- NO negative questions ("İstəməzsinizmi?") — they repel customers
-- NEVER use any negative construction in any sentence
-- Replace "qaçırmaq istəməzsiniz" style phrases with positive FOMO:
-  "Bu yazın ən gözəl seçimi artıq burada."
+{facebook_language_examples(language)}
 - Write like a trusted friend who genuinely discovered something amazing
 - Sensory words: texture, feeling, smell, sound — make them FEEL it
-- Total length: 100-130 words
-- Language: flawless Azerbaijani only"""
+- Total length: 100-130 words"""
 
-    return system, user
+    return system + language_instruction(language), user
 
 
 def tiktok_prompt(
@@ -93,17 +114,7 @@ def tiktok_prompt(
     system = """You are a TikTok viral content strategist who has created hooks that hit 10M+ views.
 You understand that TikTok users decide in 0.5 seconds whether to keep watching.
 You write hooks that trigger instant curiosity, controversy, or FOMO.
-You know Gen Z and Millennial psychology deeply.
-
-CRITICAL: Write exclusively in flawless Azerbaijani language.
-Do NOT use Turkish words or Turkish grammar structures.
-Azerbaijani-specific rules:
-- Use 'ilə' not 'ile' or 'yla/ylə'
-- Use 'deyil' not 'değil'
-- Use 'çünki' not 'çünkü'
-- Use 'həm...həm də' not 'hem...hem de'
-- Avoid any word that exists in Turkish but not in Azerbaijani
-- Natural, spoken Azerbaijani — not formal or robotic"""
+You know Gen Z and Millennial psychology deeply."""
 
     user = f"""Write ONE viral TikTok hook for "{business_name}" promoting "{product}".
 
@@ -112,15 +123,13 @@ Rules:
 - Keep it concise enough to work as an immediate opening hook
 - Must trigger instant "wait, what?" or "I need to know more" reaction
 - Formats that go viral:
-  * POV stories: "POV: bu paltarı geyindim və..."
-  * Shocking confession: "Bunu geyindim, heç kim məni tanımadı"
-  * Unexpected result: "Hamı məndən soruşdu haradan aldım"
+{tiktok_format_examples(language)}
   * Bold claim that feels almost unbelievable
 - No hashtags
 - No emojis
 - No brand name in the hook (let the video reveal it)
 - No quotation marks in output
-- Natural, spoken Azerbaijani — how a real person talks
+- Use natural, spoken language — how a real person talks
 - Output: just the hook, nothing else"""
 
-    return system, user + language_instruction(language)
+    return system + language_instruction(language), user
