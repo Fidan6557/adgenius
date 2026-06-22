@@ -94,6 +94,11 @@ async def serve_index() -> FileResponse:
     return FileResponse(INDEX_FILE)
 
 
+@app.get("/health", include_in_schema=False)
+async def health_check() -> dict[str, str]:
+    return {"status": "ok"}
+
+
 @app.post("/generate", response_model=GenerateResponse)
 async def generate_ads(payload: GenerateRequest) -> GenerateResponse:
     client = get_openai_client()
