@@ -1,14 +1,15 @@
 # AdGenius
 
-AI əsaslı multi-platform reklam generatoru. Bir biznes adı və məhsul/xidmət
+AI əsaslı çoxplatformalı reklam generatoru. Bir biznes adı və məhsul/xidmət
 məlumatından Instagram, Facebook və TikTok üçün platformaya uyğun üç fərqli
 reklam mətni yaradır.
 
 **AI / Prompt Engineer Intern — Technical Assignment**
 
-[GitHub repository](https://github.com/Fidan6557/adgenius)
+[GitHub repozitoriyası](https://github.com/Fidan6557/adgenius)
 
-> Railway demo linki deploy tamamlandıqdan sonra buraya əlavə edilməlidir.
+[Live Demo](https://adgenius-production-0206.up.railway.app)
+
 
 ## Əsas imkanlar
 
@@ -16,12 +17,12 @@ reklam mətni yaradır.
 - Facebook üçün detallı, axıcı reklam mətni və güclü CTA
 - TikTok üçün qısa, diqqətçəkici viral hook
 - Üç OpenAI sorğusunun `asyncio.gather` ilə paralel icrası
-- Azərbaycan və İngilis interfeys seçimləri
+- Azərbaycan və İngilis interfeys və reklam dili seçimləri
 - Nəticələrin bir kliklə kopyalanması
-- Eyni məlumatlarla yenidən generasiya
-- Son 5 generasiyanın sessiya tarixçəsi
-- Responsiv və əlçatan light-theme interfeys
-- Input validation və təhlükəsiz DOM rendering
+- Eyni məlumatlarla yenidən reklam yaratmaq imkanı
+- Son 5 nəticənin səhifə yenilənənədək saxlanılması
+- Responsiv, əlçatan və açıq rəngli interfeys
+- Giriş məlumatlarının yoxlanılması və təhlükəsiz DOM rendering
 - Railway üçün Docker və health-check konfiqurasiyası
 
 ## Texnologiyalar
@@ -52,7 +53,7 @@ FastAPI + Pydantic validation
 JSON response → nəticə kartları
 ```
 
-Platformaların hər biri ayrıca system və user promptundan istifadə edir. Bu,
+Platformaların hər biri ayrıca system və user promptundan istifadə edir. Bu
 tonun, uzunluğun, CTA-nın və formatın hər platformanın davranışına uyğun
 idarə olunmasına imkan verir.
 
@@ -69,21 +70,22 @@ ad-generator/
 ├── railway.toml
 ├── .env.example
 ├── tests/
-│   └── test_app.py
+│   ├── test_app.py
+│   └── test_prompts.py
 └── templates/
     └── index.html
 ```
 
 ## Lokal quraşdırma
 
-### 1. Repository-ni klonlayın
+### 1. Repozitoriyanı klonlayın
 
 ```bash
 git clone https://github.com/Fidan6557/adgenius.git
 cd adgenius
 ```
 
-### 2. Virtual environment yaradın
+### 2. Virtual mühit yaradın
 
 Windows:
 
@@ -105,7 +107,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 4. Environment dəyişənini əlavə edin
+### 4. Mühit dəyişənini əlavə edin
 
 `.env.example` faylını `.env` adı ilə kopyalayın:
 
@@ -129,16 +131,16 @@ http://127.0.0.1:8000
 
 ## Testlər
 
-Development asılılıqlarını quraşdırın və testləri başladın:
+Test asılılıqlarını quraşdırın və yoxlamaları başladın:
 
 ```bash
 pip install -r requirements-dev.txt
 pytest -q
 ```
 
-Test dəsti ana səhifəni, health-check endpoint-ini, input validation-u və üç
-OpenAI çağırışının ardıcıl deyil, paralel icra olunduğunu yoxlayır. Testlər real
-API açarı və ödənişli OpenAI sorğusu istifadə etmir.
+Testlər ana səhifənin və API-nin düzgün işləməsini, daxil edilən məlumatların
+yoxlanılmasını və üç platforma üçün sorğuların paralel icrasını əhatə edir.
+Yoxlama zamanı OpenAI-a real sorğu göndərilmir və API krediti istifadə olunmur.
 
 ## API istifadəsi
 
@@ -166,7 +168,7 @@ Cavab:
 
 ### `GET /health`
 
-Railway deployment health-check üçün:
+Railway deploy-unun sağlamlıq yoxlaması üçün:
 
 ```json
 {
@@ -282,51 +284,16 @@ fərqini göstərir. Real nəticələr generativ modelə görə dəyişə bilər
 
 > Bu qutular həftəmi gözlənilmədən xilas etdi
 
-## Railway deployment
-
-1. [Railway](https://railway.com/) hesabına daxil olun.
-2. **New Project → Deploy from GitHub repo** seçin.
-3. `Fidan6557/adgenius` repository-sini seçin.
-4. Service-in **Variables** bölməsinə bunu əlavə edin:
-
-   ```text
-   OPENAI_API_KEY=sk-your-real-api-key
-   ```
-
-5. Deploy-u başladın.
-6. **Settings → Networking → Generate Domain** seçərək public URL yaradın.
-7. Yaranmış URL-i bu README-nin yuxarısına və intern müraciətinə əlavə edin.
-
-Docker container Railway-in təqdim etdiyi `PORT` dəyişənini avtomatik istifadə
-edir. `/health` endpoint-i deployment aktiv edilməzdən əvvəl tətbiqin hazır
-olduğunu yoxlamaq üçün konfiqurasiya edilib.
-
 ## Təhlükəsizlik
 
 - API açarı yalnız environment dəyişənindən oxunur.
 - `.env` faylı `.gitignore` daxilindədir.
-- Request body Pydantic ilə yoxlanılır və artıq sahələr qəbul edilmir.
+- Sorğu gövdəsi Pydantic ilə yoxlanılır və artıq sahələr qəbul edilmir.
 - İstifadəçi məlumatları `textContent` ilə göstərilir; model cavabları HTML
   kimi icra edilmir.
-- Frontend tarixçəsi yalnız cari brauzer sessiyasının yaddaşındadır və səhifə
+- Tarixçə yalnız cari brauzer səhifəsinin yaddaşındadır və səhifə
   yeniləndikdə silinir.
-
-## Qiymətləndirmə tələblərinə uyğunluq
-
-- [x] Biznes adı və məhsul/xidmət girişi
-- [x] Eyni girişdən üç fərqli platforma çıxışı
-- [x] Instagram caption və minimum 5 hashtag
-- [x] Facebook detallı reklam mətni və CTA
-- [x] TikTok diqqətçəkici hook
-- [x] Platformalara uyğun ayrıca prompt dizaynı
-- [x] OpenAI API inteqrasiyası
-- [x] Oxunaqlı və strukturlaşdırılmış kod
-- [x] Responsiv UI/UX
-- [x] Bonus funksiyalar: regenerate, copy, dil seçimi və tarixçə
-- [x] Docker və Railway hazırlığı
-- [x] README-də ən azı 3 giriş–çıxış nümunəsi
 
 ## Müəllif
 
-**Fidan**  
-AI / Prompt Engineer Intern namizədi
+**Fidan** — [GitHub: @Fidan6557](https://github.com/Fidan6557)
