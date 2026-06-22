@@ -206,9 +206,13 @@ fərqini göstərir. Real nəticələr generativ modelə görə dəyişə bilər
 >
 > Yulaf südlü lattenin məxməri teksturası, təzə qəhvənin isti ətri və hər
 > qurtumdan sonra qalan yumşaq dad səhərini daha rahat, fasiləni isə daha
-> xüsusi edir. Özünə ayırdığın bir neçə dəqiqə günün ən xoş anına çevrilir.
-> Luna Coffee qonaqlarının yenidən seçdiyi bu dad artıq bir çox səhərin
-> sevimli vərdişidir.
+> xüsusi edir. Fincanı əlinə aldığın anda istiliyi ovucunda hiss edir, ilk
+> qurtumla günün tempini özün seçirsən. İşə başlamazdan əvvəl sakit bir an,
+> dostunla söhbətdə isə daha uzun qalmaq istədiyin yumşaq bir dad yaranır.
+> Luna Coffee qonaqlarının yenidən seçdiyi bu latte artıq bir çox səhərin
+> sevimli vərdişinə çevrilib. Şəhərdə rahat bir fasilənin dadını bilənlər bu
+> fincanı artıq öz gündəlik ritualına əlavə edib. Hər qurtum sakitliyi bir az
+> daha yaxınlaşdırır.
 >
 > Gəl, öz fincanını kəşf et.
 
@@ -242,8 +246,12 @@ fərqini göstərir. Real nəticələr generativ modelə görə dəyişə bilər
 > Dərinin üzərində sərin gümüş toxunuşunu, işıq düşəndə yaranan yumşaq
 > parıltını və ən sadə geyimin belə tamamlanmış görünməsini təsəvvür et. Narin
 > Studio-nun əl işi boyunbağısı hər gün taxmaq istədiyin, zaman keçdikcə
-> hekayənin bir hissəsinə çevrilən parçadır. Zərif və fərqli seçim axtaranların
-> diqqəti artıq bu kolleksiyadadır.
+> hekayənin bir hissəsinə çevrilən parçadır. Güzgüyə baxanda üslubunun daha
+> bütöv, hər hərəkətində isə detalın sənə məxsus olduğunu hiss edirsən. İncə
+> zəncir boynunda yüngül qalır, sakit parıltısı isə gündüz işığında da, axşam
+> görüşündə də özünü zərif şəkildə göstərir. Zərif və fərqli seçim edənlərin
+> diqqəti artıq bu kolleksiyadadır; hər parça əl əməyinin izini daşıyır. Bu
+> zəriflik hər baxışda sakit inam yaradır.
 >
 > Öz detalını bu gün seç.
 
@@ -275,8 +283,13 @@ fərqini göstərir. Real nəticələr generativ modelə görə dəyişə bilər
 >
 > Soyuducunu açanda səni rəngli, təzə və balanslı yeməklərin qarşıladığını
 > təsəvvür et. Vaxtın özünə qalır, gün ərzində enerjin sabit olur və hər
-> porsiyada həm doyum, həm də rahatlıq hiss edirsən. FitBox artıq planlı
-> qidalanmanı gündəlik həyatına qatan insanların həftəlik seçimidir.
+> porsiyada həm doyum, həm də rahatlıq hiss edirsən. Təzə göyərtinin ətri,
+> rəngli tərəvəzlərin xırtıltısı və əvvəlcədən düşünülmüş porsiyalar nahar
+> fasiləsini günün ən rahat hissəsinə çevirir. Axşam plan qurmağa daha çox
+> vaxtın qalır, səhər isə günün yeməyi artıq hazır olur. FitBox planlı
+> qidalanmanı gündəlik həyatına qatan insanların həftəlik seçiminə çevrilib;
+> yeni menyular hər həftə daha çox masada öz yerini tapır. Hər qutu günün
+> ritmini daha rahat saxlayır.
 >
 > Həftəlik menyunu indi seç.
 
