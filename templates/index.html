@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Generate platform-perfect ad copy for Instagram, Facebook, and TikTok.">
+  <title>AdGenius — AI Ad Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fdf8f6;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 2rem;
+      background: rgba(253,248,246,0.95);
+      border-bottom: 0.5px solid #f0e8e4;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: #8b1a4a;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: #8b1a4a;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 15px;
+    }
+
+    .nav-pill {
+      font-size: 12px;
+      color: #8b1a4a;
+      background: #fce8f0;
+      border: 0.5px solid #f0c4d4;
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-weight: 500;
+    }
+
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: #fdf8f6;
+      border: 0.5px solid #f0dde6;
+      border-radius: 100px;
+      padding: 3px;
+    }
+
+    .lang-btn {
+      font-size: 11px;
+      font-weight: 500;
+      font-family: 'Inter', sans-serif;
+      color: #b05080;
+      background: transparent;
+      border: none;
+      border-radius: 100px;
+      padding: 4px 12px;
+      cursor: pointer;
+      transition: all 0.15s;
+      letter-spacing: 0.05em;
+    }
+
+    .lang-btn.active {
+      background: #8b1a4a;
+      color: #ffffff;
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 3.5rem 2rem 2rem;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 600;
+      color: #5c0f2e;
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.5px;
+    }
+
+    .hero p {
+      font-size: 15px;
+      color: #9a6070;
+      font-weight: 300;
+      line-height: 1.6;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    /* FORM CARD */
+    .form-wrap {
+      max-width: 540px;
+      margin: 2rem auto;
+      background: #ffffff;
+      border: 0.5px solid #f0dde6;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 4px 40px rgba(139,26,74,0.06);
+    }
+
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 500px) {
+      nav { padding: 1rem; }
+      .input-row { grid-template-columns: 1fr; }
+      .hero { padding: 2.75rem 1rem 1.5rem; }
+      .hero h1 { font-size: 32px; }
+      .form-wrap, .results-wrap {
+        margin-left: 1rem;
+        margin-right: 1rem;
+      }
+      .form-wrap { padding: 1.25rem; }
+    }
+
+    .field label {
+      display: block;
+      font-size: 11px;
+      font-weight: 500;
+      color: #b05080;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .field input {
+      width: 100%;
+      height: 42px;
+      padding: 0 14px;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      color: #3d0a1e;
+      background: #fdf8f6;
+      border: 0.5px solid #e8d0da;
+      border-radius: 10px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .field input::placeholder { color: #c4a0ae; }
+
+    .field input:focus {
+      border-color: #b05080;
+      box-shadow: 0 0 0 3px rgba(139,26,74,0.08);
+    }
+
+    /* BUTTON */
+    .gen-btn {
+      width: 100%;
+      height: 46px;
+      margin-top: 0.5rem;
+      background: #8b1a4a;
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .gen-btn:hover { background: #6e1239; }
+    .gen-btn:active { transform: scale(0.99); }
+    .gen-btn:disabled { background: #c4a0ae; cursor: not-allowed; transform: none; }
+
+    /* SPINNER */
+    .spinner {
+      width: 15px;
+      height: 15px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ERROR */
+    .error-box {
+      display: none;
+      margin-top: 0.75rem;
+      padding: 10px 14px;
+      background: #fff0f3;
+      border: 0.5px solid #f5c0cc;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #8b1a4a;
+    }
+
+    /* RESULTS */
+    .results-wrap {
+      max-width: 540px;
+      margin: 1.5rem auto 4rem;
+      display: none;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #b05080;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+
+    /* RESULT CARDS */
+    .result-card {
+      background: #ffffff;
+      border: 0.5px solid #f0dde6;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 20px rgba(139,26,74,0.04);
+    }
+
+    .result-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 1.25rem;
+      border-bottom: 0.5px solid #f5eaee;
+      background: #fdf8f6;
+    }
+
+    .platform-info { display: flex; align-items: center; gap: 10px; }
+
+    .platform-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .icon-ig { background: #fce8f0; }
+    .icon-fb { background: #e8f0fe; }
+    .icon-tt { background: #f0e8fe; }
+
+    .platform-name { font-size: 13px; font-weight: 500; color: #3d0a1e; }
+    .platform-sub  { font-size: 11px; color: #b05080; }
+
+    .copy-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 500;
+      font-family: 'Inter', sans-serif;
+      color: #b05080;
+      background: #fce8f0;
+      border: 0.5px solid #f0c4d4;
+      border-radius: 8px;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .copy-btn:hover { background: #f5d0de; }
+    .copy-btn.copied { color: #2d7a4a; background: #e8f5ee; border-color: #b0d8c0; }
+
+    .regen-btn {
+      width: 100%;
+      height: 42px;
+      background: transparent;
+      color: #8b1a4a;
+      border: 0.5px solid #f0dde6;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.2s, border-color 0.2s;
+      margin-top: 0.25rem;
+    }
+
+    .regen-btn:hover {
+      background: #fce8f0;
+      border-color: #e8c0d0;
+    }
+
+    .regen-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .history-item {
+      background: #fdf8f6;
+      border: 0.5px solid #f0dde6;
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      transition: background 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .history-item:hover {
+      background: #fce8f0;
+    }
+
+    .history-meta {
+      font-size: 12px;
+      color: #b05080;
+      font-weight: 500;
+      overflow-wrap: anywhere;
+    }
+
+    .history-sub {
+      font-size: 11px;
+      color: #c4a0ae;
+      margin-top: 2px;
+    }
+
+    .history-time {
+      flex-shrink: 0;
+      font-size: 11px;
+      color: #c4a0ae;
+    }
+
+    .result-body {
+      padding: 1rem 1.25rem;
+      font-size: 14px;
+      line-height: 1.75;
+      color: #3d0a1e;
+      white-space: pre-wrap;
+      min-height: 60px;
+    }
+
+    /* SKELETON */
+    .skeleton {
+      height: 13px;
+      background: #f5eaee;
+      border-radius: 4px;
+      margin-bottom: 8px;
+      animation: pulse 1.3s infinite;
+    }
+
+    @keyframes pulse { 0%,100%{opacity:.5} 50%{opacity:1} }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <div class="logo-icon">✦</div>
+      AdGenius
+    </div>
+    <div class="lang-switcher">
+      <button class="lang-btn active" id="lang-az" type="button" onclick="setLang('az')">AZ</button>
+      <button class="lang-btn" id="lang-en" type="button" onclick="setLang('en')">EN</button>
+    </div>
+    <div class="nav-pill" id="nav-pill">AI Reklam Generatoru</div>
+  </nav>
+
+  <div class="hero">
+    <h1 id="hero-title">Dönüşüm yaradan<br>reklamlar yaradın</h1>
+    <p id="hero-sub">Instagram, Facebook və TikTok üçün platformaya uyğun reklam mətnlərini saniyələr içində yaradın.</p>
+  </div>
+
+  <form class="form-wrap" id="ad-form">
+    <div class="input-row">
+      <div class="field">
+        <label for="biz" id="biz-label">Biznes adı</label>
+        <input id="biz" type="text" maxlength="120" placeholder="məs. Luna Coffee" autocomplete="organization" required>
+      </div>
+      <div class="field">
+        <label for="prod" id="prod-label">Məhsul / xidmət</label>
+        <input id="prod" type="text" maxlength="500" placeholder="məs. Oat milk latte" autocomplete="off" required>
+      </div>
+    </div>
+    <button class="gen-btn" id="gen-btn" type="submit">
+      <div class="spinner" id="spinner"></div>
+      <i class="ti ti-wand" id="btn-icon"></i>
+      <span id="btn-text">Reklam yarat</span>
+    </button>
+    <div class="error-box" id="error-box" role="alert"></div>
+  </form>
+
+  <div class="results-wrap" id="results" aria-live="polite">
+    <div class="section-label" id="section-label">Yaradılmış reklamlarınız</div>
+
+    <div class="result-card">
+      <div class="result-header">
+        <div class="platform-info">
+          <div class="platform-icon icon-ig">📸</div>
+          <div>
+            <div class="platform-name">Instagram</div>
+            <div class="platform-sub" id="ig-sub">Başlıq + hashtaglər</div>
+          </div>
+        </div>
+        <button class="copy-btn" type="button" onclick="copyText('ig-text', this)">
+          <i class="ti ti-copy"></i> <span>Kopyala</span>
+        </button>
+      </div>
+      <div class="result-body" id="ig-text"></div>
+    </div>
+
+    <div class="result-card">
+      <div class="result-header">
+        <div class="platform-info">
+          <div class="platform-icon icon-fb">👥</div>
+          <div>
+            <div class="platform-name">Facebook</div>
+            <div class="platform-sub" id="fb-sub">Reklam mətni + CTA</div>
+          </div>
+        </div>
+        <button class="copy-btn" type="button" onclick="copyText('fb-text', this)">
+          <i class="ti ti-copy"></i> <span>Kopyala</span>
+        </button>
+      </div>
+      <div class="result-body" id="fb-text"></div>
+    </div>
+
+    <div class="result-card">
+      <div class="result-header">
+        <div class="platform-info">
+          <div class="platform-icon icon-tt">🎵</div>
+          <div>
+            <div class="platform-name">TikTok</div>
+            <div class="platform-sub" id="tt-sub">Viral hook cümləsi</div>
+          </div>
+        </div>
+        <button class="copy-btn" type="button" onclick="copyText('tt-text', this)">
+          <i class="ti ti-copy"></i> <span>Kopyala</span>
+        </button>
+      </div>
+      <div class="result-body" id="tt-text"></div>
+    </div>
+
+    <button class="regen-btn" id="regen-btn" type="button" onclick="regenerate()" style="display:none">
+      <i class="ti ti-refresh"></i>
+      <span id="regen-text">Yenidən yarat</span>
+    </button>
+
+    <div id="history-section" style="display:none; margin-top: 1.5rem;">
+      <div class="section-label" id="history-label">Son generasiyalar</div>
+      <div id="history-list" style="display:flex; flex-direction:column; gap:0.5rem; margin-top:0.5rem;"></div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('ad-form');
+
+    const translations = {
+      az: {
+        heroTitle: "Dönüşüm yaradan<br>reklamlar yaradın",
+        heroSub: "Instagram, Facebook və TikTok üçün platformaya uyğun reklam mətnlərini saniyələr içində yaradın.",
+        bizLabel: "Biznes adı",
+        bizPlaceholder: "məs. Luna Coffee",
+        prodLabel: "Məhsul / xidmət",
+        prodPlaceholder: "məs. Oat milk latte",
+        generateBtn: "Reklam yarat",
+        generatingBtn: "Yaradılır...",
+        sectionLabel: "Yaradılmış reklamlarınız",
+        igSub: "Başlıq + hashtaglər",
+        fbSub: "Reklam mətni + CTA",
+        ttSub: "Viral hook cümləsi",
+        copy: "Kopyala",
+        copied: "Kopyalandı",
+        errorEmpty: "Zəhmət olmasa hər iki sahəni doldurun.",
+        errorFail: "Xəta baş verdi. Yenidən cəhd edin.",
+        navPill: "AI Reklam Generatoru",
+        regenBtn: "Yenidən yarat",
+        historyLabel: "Son generasiyalar"
+      },
+      en: {
+        heroTitle: "Create ads that<br>actually convert",
+        heroSub: "Generate platform-perfect ad copy for Instagram, Facebook, and TikTok in seconds.",
+        bizLabel: "Business name",
+        bizPlaceholder: "e.g. Luna Coffee",
+        prodLabel: "Product / service",
+        prodPlaceholder: "e.g. Oat milk latte",
+        generateBtn: "Generate ads",
+        generatingBtn: "Generating...",
+        sectionLabel: "Your generated ads",
+        igSub: "Caption + hashtags",
+        fbSub: "Ad copy + CTA",
+        ttSub: "Viral hook",
+        copy: "Copy",
+        copied: "Copied",
+        errorEmpty: "Please fill in both fields before generating.",
+        errorFail: "Something went wrong. Please try again.",
+        navPill: "AI Ad Generator",
+        regenBtn: "Regenerate",
+        historyLabel: "Recent generations"
+      }
+    };
+
+    let currentLang = 'az';
+    let isGenerating = false;
+    let history = [];
+
+    function setLang(lang) {
+      currentLang = lang;
+      const t = translations[lang];
+
+      document.documentElement.lang = lang;
+      document.getElementById('lang-az').classList.toggle('active', lang === 'az');
+      document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+      document.getElementById('hero-title').innerHTML = t.heroTitle;
+      document.getElementById('hero-sub').textContent = t.heroSub;
+      document.getElementById('biz-label').textContent = t.bizLabel;
+      document.getElementById('biz').placeholder = t.bizPlaceholder;
+      document.getElementById('prod-label').textContent = t.prodLabel;
+      document.getElementById('prod').placeholder = t.prodPlaceholder;
+      document.getElementById('btn-text').textContent = isGenerating ? t.generatingBtn : t.generateBtn;
+      document.getElementById('section-label').textContent = t.sectionLabel;
+      document.getElementById('ig-sub').textContent = t.igSub;
+      document.getElementById('fb-sub').textContent = t.fbSub;
+      document.getElementById('tt-sub').textContent = t.ttSub;
+      document.getElementById('nav-pill').textContent = t.navPill;
+      document.getElementById('regen-text').textContent = t.regenBtn;
+      document.getElementById('history-label').textContent = t.historyLabel;
+
+      document.querySelectorAll('.copy-btn').forEach((btn) => {
+        if (!btn.classList.contains('copied')) {
+          btn.querySelector('span').textContent = t.copy;
+        }
+      });
+    }
+
+    form.addEventListener('submit', generate);
+
+    async function generate(event) {
+      if (event) {
+        event.preventDefault();
+      }
+
+      const biz = document.getElementById('biz').value.trim();
+      const prod = document.getElementById('prod').value.trim();
+      const errBox = document.getElementById('error-box');
+      const results = document.getElementById('results');
+      const btn = document.getElementById('gen-btn');
+      const regenBtn = document.getElementById('regen-btn');
+
+      errBox.style.display = 'none';
+
+      if (!biz || !prod) {
+        errBox.textContent = translations[currentLang].errorEmpty;
+        errBox.style.display = 'block';
+        return;
+      }
+
+      isGenerating = true;
+      btn.disabled = true;
+      regenBtn.disabled = true;
+      document.getElementById('spinner').style.display = 'block';
+      document.getElementById('btn-icon').style.display = 'none';
+      document.getElementById('btn-text').textContent = translations[currentLang].generatingBtn;
+
+      ['ig-text', 'fb-text', 'tt-text'].forEach((id) => {
+        document.getElementById(id).innerHTML =
+          '<div class="skeleton" style="width:88%"></div>' +
+          '<div class="skeleton" style="width:70%"></div>' +
+          '<div class="skeleton" style="width:55%"></div>';
+      });
+      results.style.display = 'flex';
+
+      try {
+        const response = await fetch('/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            business_name: biz,
+            product: prod,
+            language: currentLang
+          })
+        });
+
+        let data;
+        try {
+          data = await response.json();
+        } catch {
+          throw new Error('The server returned an invalid response.');
+        }
+
+        if (!response.ok) {
+          throw new Error(translations[currentLang].errorFail);
+        }
+
+        document.getElementById('ig-text').textContent = data.instagram;
+        document.getElementById('fb-text').textContent = data.facebook;
+        document.getElementById('tt-text').textContent = data.tiktok;
+        regenBtn.style.display = 'flex';
+        saveToHistory(
+          biz,
+          prod,
+          data.instagram,
+          data.facebook,
+          data.tiktok
+        );
+      } catch (error) {
+        errBox.textContent = error.message || translations[currentLang].errorFail;
+        errBox.style.display = 'block';
+        results.style.display = 'none';
+      } finally {
+        isGenerating = false;
+        btn.disabled = false;
+        regenBtn.disabled = false;
+        document.getElementById('spinner').style.display = 'none';
+        document.getElementById('btn-icon').style.display = '';
+        document.getElementById('btn-text').textContent = translations[currentLang].generateBtn;
+      }
+    }
+
+    function regenerate() {
+      const biz = document.getElementById('biz').value.trim();
+      const prod = document.getElementById('prod').value.trim();
+
+      if (biz && prod && !isGenerating) {
+        generate();
+      }
+    }
+
+    function saveToHistory(biz, prod, ig, fb, tt) {
+      const item = {
+        biz,
+        prod,
+        ig,
+        fb,
+        tt,
+        time: new Date().toLocaleTimeString('az-AZ', {
+          hour: '2-digit',
+          minute: '2-digit'
+        })
+      };
+
+      history.unshift(item);
+      if (history.length > 5) {
+        history.pop();
+      }
+      renderHistory();
+    }
+
+    function renderHistory() {
+      if (history.length === 0) {
+        return;
+      }
+
+      document.getElementById('history-section').style.display = 'block';
+      const list = document.getElementById('history-list');
+      list.replaceChildren();
+
+      history.forEach((item, index) => {
+        const historyItem = document.createElement('div');
+        const details = document.createElement('div');
+        const meta = document.createElement('div');
+        const sub = document.createElement('div');
+        const time = document.createElement('div');
+
+        historyItem.className = 'history-item';
+        historyItem.tabIndex = 0;
+        historyItem.setAttribute('role', 'button');
+        meta.className = 'history-meta';
+        sub.className = 'history-sub';
+        time.className = 'history-time';
+
+        meta.textContent = `${item.biz} — ${item.prod}`;
+        sub.textContent = 'Instagram · Facebook · TikTok';
+        time.textContent = item.time;
+
+        details.append(meta, sub);
+        historyItem.append(details, time);
+        historyItem.addEventListener('click', () => restoreHistory(index));
+        historyItem.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            restoreHistory(index);
+          }
+        });
+        list.appendChild(historyItem);
+      });
+    }
+
+    function restoreHistory(index) {
+      const item = history[index];
+      if (!item) {
+        return;
+      }
+
+      document.getElementById('ig-text').textContent = item.ig;
+      document.getElementById('fb-text').textContent = item.fb;
+      document.getElementById('tt-text').textContent = item.tt;
+      document.getElementById('biz').value = item.biz;
+      document.getElementById('prod').value = item.prod;
+      document.getElementById('results').style.display = 'flex';
+      document.getElementById('regen-btn').style.display = 'flex';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    async function writeToClipboard(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.opacity = '0';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      const copied = document.execCommand('copy');
+      textArea.remove();
+
+      if (!copied) {
+        throw new Error('Copy failed.');
+      }
+    }
+
+    async function copyText(id, btn) {
+      const text = document.getElementById(id).textContent;
+
+      try {
+        await writeToClipboard(text);
+        btn.innerHTML = '<i class="ti ti-check"></i> <span></span>';
+        btn.querySelector('span').textContent = translations[currentLang].copied;
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = '<i class="ti ti-copy"></i> <span></span>';
+          btn.querySelector('span').textContent = translations[currentLang].copy;
+          btn.classList.remove('copied');
+        }, 2000);
+      } catch {
+        const errBox = document.getElementById('error-box');
+        errBox.textContent = translations[currentLang].errorFail;
+        errBox.style.display = 'block';
+      }
+    }
+
+    setLang('az');
+  </script>
+</body>
+</html>
