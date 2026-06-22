@@ -109,6 +109,7 @@ Azerbaijani-specific rules:
 
 Rules:
 - Length: however long it needs to be to create maximum impact
+- Keep it concise enough to work as an immediate opening hook
 - Must trigger instant "wait, what?" or "I need to know more" reaction
 - Formats that go viral:
   * POV stories: "POV: bu paltarı geyindim və..."
