@@ -20,15 +20,15 @@ def language_instruction(language: str) -> str:
 def facebook_language_examples(language: str) -> str:
     if language == "az":
         return (
-            '- NO negative questions ("İstəməzsinizmi?") — they repel customers\n'
-            "- NEVER use any negative construction in any sentence\n"
-            '- Replace "qaçırmaq istəməzsiniz" style phrases with positive FOMO:\n'
+            '- Keep every sentence affirmative and desire-led; no negative framing\n'
+            '- Avoid words like "yox", "deyil", "istəmir", "qaçırma", or "gecikmə"\n'
+            '- Replace pressure-based FOMO with positive social proof:\n'
             '  "Bu yazın ən gözəl seçimi artıq burada."'
         )
     return (
-        '- NO negative questions ("Wouldn’t you want...?") — they repel customers\n'
-        "- NEVER use any negative construction in any sentence\n"
-        '- Replace "you do not want to miss this" style phrases with positive FOMO:\n'
+        "- Keep every sentence affirmative and desire-led; no negative framing\n"
+        '- Avoid words like "not", "never", "don\'t", "miss out", or "too late"\n'
+        "- Replace pressure-based FOMO with positive social proof:\n"
         '  "This season’s most exciting choice is already here."'
     )
 
@@ -83,15 +83,15 @@ You paint pictures of transformation, not features."""
 
 Follow this exact structure — but write it as ONE flowing piece, no labels:
 
-1. Opening line: Make them feel something is missing in their life right now.
-   Create a subtle desire or tension. (1 sentence)
+1. Opening line: Start with a positive, aspirational moment that creates desire.
+   Keep it confident and affirmative. (1 sentence)
 
 2. Body: Describe the transformation — not the product features, but how their
    life FEELS after using it. Use sensory language. Make them visualize it.
    (2-3 sentences)
 
-3. Social pull: One sentence that makes them feel everyone else already knows
-   about this. FOMO without being obvious.
+3. Social proof: One sentence that makes the product feel already trusted or
+   naturally chosen by people like the reader.
 
 4. CTA: Short, confident, action-driven. Maximum 6 words. Imperative form.
    Must feel like an invitation, not a command.
@@ -100,6 +100,7 @@ Follow this exact structure — but write it as ONE flowing piece, no labels:
 Rules:
 - Zero corporate language
 - Zero clichés ("Don't miss out", "Limited time", "Check this out")
+- No rhetorical questions
 {facebook_language_examples(language)}
 - Write like a trusted friend who genuinely discovered something amazing
 - Sensory words: texture, feeling, smell, sound — make them FEEL it
@@ -119,8 +120,8 @@ You know Gen Z and Millennial psychology deeply."""
     user = f"""Write ONE viral TikTok hook for "{business_name}" promoting "{product}".
 
 Rules:
-- Length: however long it needs to be to create maximum impact
-- Keep it concise enough to work as an immediate opening hook
+- Length: 6-14 words
+- Keep it concise enough to work as the first spoken line of a video
 - Must trigger instant "wait, what?" or "I need to know more" reaction
 - Formats that go viral:
 {tiktok_format_examples(language)}

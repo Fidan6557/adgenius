@@ -10,6 +10,17 @@ reklam mətni yaradır.
 
 [Live Demo](https://adgenius-production-0206.up.railway.app)
 
+## Tapşırıq uyğunluğu
+
+| PDF tələbi | Layihədə icra |
+|---|---|
+| Biznes adı və məhsul/xidmət girişi | Ana səhifədə iki əsas input sahəsi |
+| Instagram çıxışı | Caption və tam 7 hashtag |
+| Facebook çıxışı | Daha detallı reklam mətni və ayrıca CTA |
+| TikTok çıxışı | Qısa, diqqətçəkici hook cümləsi |
+| GitHub repository | README-də və submit məlumatlarında link |
+| Railway deploy | Canlı demo və `/health` endpoint-i |
+| README-də 3 nümunə | Aşağıda 3 giriş və platformalara görə çıxış |
 
 ## Əsas imkanlar
 
@@ -112,7 +123,7 @@ pip install -r requirements.txt
 `.env.example` faylını `.env` adı ilə kopyalayın:
 
 ```env
-OPENAI_API_KEY=sk-your-real-api-key
+OPENAI_API_KEY=your_openai_api_key_here
 ```
 
 `.env` Git tərəfindən izlənilmir. Real API açarını repository-yə əlavə etməyin.
