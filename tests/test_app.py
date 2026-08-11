@@ -55,7 +55,7 @@ def test_health_check():
 def test_generate_validates_empty_inputs():
     response = client.post(
         "/generate",
-        json={"business_name": "", "product": "", "language": "az"},
+        json={"business_name": "", "product": ""},
     )
 
     assert response.status_code == 422
@@ -69,8 +69,7 @@ def test_generate_runs_platform_calls_concurrently(monkeypatch):
         "/generate",
         json={
             "business_name": "Luna Coffee",
-            "product": "Yulaf südlü latte",
-            "language": "az",
+            "product": "Oat milk latte",
         },
     )
     elapsed = time.perf_counter() - started_at

@@ -1,74 +1,73 @@
 # AdGenius
 
-AI əsaslı çoxplatformalı reklam generatoru. Bir biznes adı və məhsul/xidmət
-məlumatından Instagram, Facebook və TikTok üçün platformaya uyğun üç fərqli
-reklam mətni yaradır.
+An AI-powered, multi-platform ad generator. It turns a business name and
+product or service description into three platform-specific ads for Instagram,
+Facebook, and TikTok.
 
 **AI / Prompt Engineer Intern — Technical Assignment**
 
-[GitHub repozitoriyası](https://github.com/Fidan6557/adgenius)
+[GitHub repository](https://github.com/Fidan6557/adgenius)
 
 [Live Demo](https://adgenius-production-0206.up.railway.app)
 
-## Tapşırıq uyğunluğu
+## Assignment requirements
 
-| PDF tələbi | Layihədə icra |
+| PDF requirement | Implementation |
 |---|---|
-| Biznes adı və məhsul/xidmət girişi | Ana səhifədə iki əsas input sahəsi |
-| Instagram çıxışı | Caption və tam 7 hashtag |
-| Facebook çıxışı | Daha detallı reklam mətni və ayrıca CTA |
-| TikTok çıxışı | Qısa, diqqətçəkici hook cümləsi |
-| GitHub repository | README-də və submit məlumatlarında link |
-| Railway deploy | Canlı demo və `/health` endpoint-i |
-| README-də 3 nümunə | Aşağıda 3 giriş və platformalara görə çıxış |
+| Business name and product/service input | Two primary input fields on the home page |
+| Instagram output | Caption with exactly 7 hashtags |
+| Facebook output | Detailed ad copy with a separate CTA |
+| TikTok output | Short, attention-grabbing hook |
+| GitHub repository | Link in the README and submission details |
+| Railway deployment | Live demo and `/health` endpoint |
+| 3 README examples | Three inputs with platform-specific outputs below |
 
-## Əsas imkanlar
+## Key features
 
-- Instagram üçün emosional caption və tam 7 uyğun hashtag
-- Facebook üçün detallı, axıcı reklam mətni və güclü CTA
-- TikTok üçün qısa, diqqətçəkici viral hook
-- Üç OpenAI sorğusunun `asyncio.gather` ilə paralel icrası
-- Azərbaycan və İngilis interfeys və reklam dili seçimləri
-- Nəticələrin bir kliklə kopyalanması
-- Eyni məlumatlarla yenidən reklam yaratmaq imkanı
-- Son 5 nəticənin səhifə yenilənənədək saxlanılması
-- Responsiv, əlçatan və açıq rəngli interfeys
-- Giriş məlumatlarının yoxlanılması və təhlükəsiz DOM rendering
-- Railway üçün Docker və health-check konfiqurasiyası
+- Emotional Instagram captions with exactly 7 relevant hashtags
+- Detailed, natural Facebook ad copy with a strong CTA
+- Short, attention-grabbing TikTok hooks
+- Three OpenAI requests executed concurrently with `asyncio.gather`
+- English interface and ad copy
+- One-click result copying
+- Ad regeneration using the same input
+- The latest 5 results retained until the page is refreshed
+- Responsive, accessible, light-themed interface
+- Input validation and safe DOM rendering
+- Docker and health-check configuration for Railway
 
-## Texnologiyalar
+## Technology stack
 
-| Hissə | Texnologiya |
+| Component | Technology |
 |---|---|
 | Backend | Python, FastAPI, Pydantic |
-| AI | OpenAI GPT-4o, async Python SDK |
+| AI | OpenAI GPT-4o, asynchronous Python SDK |
 | Frontend | HTML, CSS, Vanilla JavaScript |
 | Deployment | Docker, Railway |
 
-## Arxitektura
+## Architecture
 
 ```text
-İstifadəçi
-    │
-    ▼
+User
+  │
+  ▼
 Vanilla JS frontend
-    │  POST /generate
-    ▼
+  │  POST /generate
+  ▼
 FastAPI + Pydantic validation
-    │
-    ├── Instagram prompt ─┐
-    ├── Facebook prompt ──┼── asyncio.gather ──► OpenAI GPT-4o
-    └── TikTok prompt ────┘
-    │
-    ▼
-JSON response → nəticə kartları
+  │
+  ├── Instagram prompt ─┐
+  ├── Facebook prompt ──┼── asyncio.gather ──► OpenAI GPT-4o
+  └── TikTok prompt ────┘
+  │
+  ▼
+JSON response → result cards
 ```
 
-Platformaların hər biri ayrıca system və user promptundan istifadə edir. Bu
-tonun, uzunluğun, CTA-nın və formatın hər platformanın davranışına uyğun
-idarə olunmasına imkan verir.
+Each platform uses a separate system prompt and user prompt. This makes it
+possible to tailor the tone, length, CTA, and format to each platform.
 
-## Layihə strukturu
+## Project structure
 
 ```text
 ad-generator/
@@ -87,16 +86,16 @@ ad-generator/
     └── index.html
 ```
 
-## Lokal quraşdırma
+## Local setup
 
-### 1. Repozitoriyanı klonlayın
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/Fidan6557/adgenius.git
 cd adgenius
 ```
 
-### 2. Virtual mühit yaradın
+### 2. Create a virtual environment
 
 Windows:
 
@@ -112,62 +111,61 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-### 3. Asılılıqları quraşdırın
+### 3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Mühit dəyişənini əlavə edin
+### 4. Add the environment variable
 
-`.env.example` faylını `.env` adı ilə kopyalayın:
+Copy `.env.example` to a file named `.env`:
 
 ```env
 OPENAI_API_KEY=your_openai_api_key_here
 ```
 
-`.env` Git tərəfindən izlənilmir. Real API açarını repository-yə əlavə etməyin.
+Git does not track `.env`. Never commit a real API key to the repository.
 
-### 5. Tətbiqi başladın
+### 5. Start the application
 
 ```bash
 uvicorn main:app --reload
 ```
 
-Brauzerdə açın:
+Open this address in your browser:
 
 ```text
 http://127.0.0.1:8000
 ```
 
-## Testlər
+## Tests
 
-Test asılılıqlarını quraşdırın və yoxlamaları başladın:
+Install the test dependencies and run the test suite:
 
 ```bash
 pip install -r requirements-dev.txt
 pytest -q
 ```
 
-Testlər ana səhifənin və API-nin düzgün işləməsini, daxil edilən məlumatların
-yoxlanılmasını və üç platforma üçün sorğuların paralel icrasını əhatə edir.
-Yoxlama zamanı OpenAI-a real sorğu göndərilmir və API krediti istifadə olunmur.
+The tests cover the home page, API behavior, input validation, and concurrent
+execution of the three platform requests. The test suite does not make real
+OpenAI requests or consume API credits.
 
-## API istifadəsi
+## API usage
 
 ### `POST /generate`
 
-Sorğu:
+Request:
 
 ```json
 {
   "business_name": "Luna Coffee",
-  "product": "yulaf südlü latte",
-  "language": "az"
+  "product": "oat milk latte"
 }
 ```
 
-Cavab:
+Response:
 
 ```json
 {
@@ -179,7 +177,7 @@ Cavab:
 
 ### `GET /health`
 
-Railway deploy-unun sağlamlıq yoxlaması üçün:
+Used by Railway to check the health of the deployment:
 
 ```json
 {
@@ -187,137 +185,134 @@ Railway deploy-unun sağlamlıq yoxlaması üçün:
 }
 ```
 
-## Nümunə giriş və çıxışlar
+## Example inputs and outputs
 
-Aşağıdakı nümunələr prompt dizaynının platformalar arasında ton və struktur
-fərqini göstərir. Real nəticələr generativ modelə görə dəyişə bilər.
+The examples below demonstrate how the prompt design varies tone and structure
+across platforms. Actual output may vary because it is generated by a language
+model.
 
-### Nümunə 1 — Luna Coffee
+### Example 1 — Luna Coffee
 
-**Giriş**
+**Input**
 
-- Biznes: `Luna Coffee`
-- Məhsul/xidmət: `Yulaf südlü latte`
+- Business: `Luna Coffee`
+- Product/service: `Oat milk latte`
 
 **Instagram**
 
-> Səhərin bir az daha yumşaq başlasa, necə olardı? ☕ Luna Coffee-də yulaf
-> südlü latte ilk qurtumdan sakit bir səhər hissi yaradır: məxməri tekstura,
-> isti qəhvə ətri və günə tələsmədən başlamaq üçün balaca bir fasilə 🌿✨
-> Dostunla söhbətə, kitabınla tək qalmağa və ya sadəcə özünə vaxt ayırmağa
-> yaraşan həmin fincan budur 🤍 Bu gün yolunu Luna Coffee-dən sal, bəlkə yeni
-> sevimli dadını tapdın.
+> What if your morning started just a little more gently? ☕ Luna Coffee's oat
+> milk latte creates a calm morning feeling from the very first sip: a velvety
+> texture, the warm aroma of coffee, and a small pause before the day begins 🌿✨
+> It is the perfect cup for catching up with a friend, getting lost in a book,
+> or simply making time for yourself 🤍 Stop by Luna Coffee today—you may just
+> discover your new favorite flavor.
 >
-> #YulafSüdlüLatte #QəhvəSevərlər #LunaCoffee #BakıKafeləri #CoffeeTime
-> #Lifestyle #GününDadı
+> #OatMilkLatte #CoffeeLovers #LunaCoffee #LocalCafe #CoffeeTime #Lifestyle
+> #TasteOfTheDay
 
 **Facebook**
 
-> Bəzən yaxşı bir günün çatışmayan hissəsi sadəcə doğru fincandır.
+> Sometimes, the missing piece of a good day is simply the right cup.
 >
-> Yulaf südlü lattenin məxməri teksturası, təzə qəhvənin isti ətri və hər
-> qurtumdan sonra qalan yumşaq dad səhərini daha rahat, fasiləni isə daha
-> xüsusi edir. Fincanı əlinə aldığın anda istiliyi ovucunda hiss edir, ilk
-> qurtumla günün tempini özün seçirsən. İşə başlamazdan əvvəl sakit bir an,
-> dostunla söhbətdə isə daha uzun qalmaq istədiyin yumşaq bir dad yaranır.
-> Luna Coffee qonaqlarının yenidən seçdiyi bu latte artıq bir çox səhərin
-> sevimli vərdişinə çevrilib. Şəhərdə rahat bir fasilənin dadını bilənlər bu
-> fincanı artıq öz gündəlik ritualına əlavə edib. Hər qurtum sakitliyi bir az
-> daha yaxınlaşdırır.
+> The velvety texture of an oat milk latte, the warm aroma of fresh coffee, and
+> the smooth flavor that lingers after every sip make mornings calmer and breaks
+> more meaningful. Feel the warmth in your hands as you lift the cup and choose
+> your own pace with that first sip. It becomes a quiet moment before work or a
+> comforting flavor that makes you want to stay a little longer with a friend.
+> This latte has become a favorite ritual for Luna Coffee guests who return to
+> it again and again. Every sip brings calm a little closer.
 >
-> Gəl, öz fincanını kəşf et.
+> Discover your perfect cup today.
 
 **TikTok**
 
-> Bu latte səhər rutinimi tamamilə dəyişdi
+> This latte completely changed my morning routine
 
-### Nümunə 2 — Narin Studio
+### Example 2 — Narin Studio
 
-**Giriş**
+**Input**
 
-- Biznes: `Narin Studio`
-- Məhsul/xidmət: `Əl işi minimalist gümüş boyunbağı`
+- Business: `Narin Studio`
+- Product/service: `Handmade minimalist silver necklace`
 
 **Instagram**
 
-> Bəzən bütün görünüşü dəyişən detal ən sakit olanıdır ✨ Narin Studio-nun əl
-> işi gümüş boyunbağısı işığı incə şəkildə tutur, sevdiyin köynəyə də, xüsusi
-> axşam geyiminə də özünəməxsus zəriflik qatır 🤍 Hər toxunuşunda ustanın
-> diqqətini hiss etdiyin bu parça sadəcə aksesuar deyil — gündəlik üslubunun
-> kiçik imzasıdır 🌙 Özün üçün seç, ya da dəyər verdiyin birinə mənalı hədiyyə
-> et 🎁 Hansı görünüşlə tamamlayacağını təsəvvür et.
+> Sometimes, the quietest detail transforms an entire look ✨ Narin Studio's
+> handmade silver necklace catches the light delicately, adding effortless
+> elegance to your favorite shirt or an evening outfit 🤍 You can feel the
+> maker's care in every touch—this is more than an accessory; it is a small
+> signature for your everyday style 🌙 Choose it for yourself or give someone
+> special a meaningful gift 🎁 Imagine the look you will complete with it.
 >
-> #ƏlİşiZinət #GümüşBoyunbağı #NarinStudio #MinimalStil #MadeInAzerbaijan
+> #HandmadeJewelry #SilverNecklace #NarinStudio #MinimalStyle #MadeByHand
 > #JewelryLover #StyleInspiration
 
 **Facebook**
 
-> Görünüşündə səni ifadə edən o incə detal artıq buradadır.
+> The subtle detail that expresses who you are is already here.
 >
-> Dərinin üzərində sərin gümüş toxunuşunu, işıq düşəndə yaranan yumşaq
-> parıltını və ən sadə geyimin belə tamamlanmış görünməsini təsəvvür et. Narin
-> Studio-nun əl işi boyunbağısı hər gün taxmaq istədiyin, zaman keçdikcə
-> hekayənin bir hissəsinə çevrilən parçadır. Güzgüyə baxanda üslubunun daha
-> bütöv, hər hərəkətində isə detalın sənə məxsus olduğunu hiss edirsən. İncə
-> zəncir boynunda yüngül qalır, sakit parıltısı isə gündüz işığında da, axşam
-> görüşündə də özünü zərif şəkildə göstərir. Zərif və fərqli seçim edənlərin
-> diqqəti artıq bu kolleksiyadadır; hər parça əl əməyinin izini daşıyır. Bu
-> zəriflik hər baxışda sakit inam yaradır.
+> Imagine the cool touch of silver on your skin, the soft shimmer when it catches
+> the light, and how even the simplest outfit suddenly feels complete. Narin
+> Studio's handmade necklace is a piece you will want to wear every day, becoming
+> part of your story over time. Its fine chain feels light around your neck, while
+> its gentle glow adds elegance in daylight and at evening gatherings alike.
+> People drawn to refined and distinctive choices are already discovering this
+> collection, with every piece carrying the mark of genuine craftsmanship. Its
+> quiet elegance inspires confidence at every glance.
 >
-> Öz detalını bu gün seç.
+> Choose your signature detail today.
 
 **TikTok**
 
-> Bunu taxdım, hamı haradan aldığımı soruşdu
+> I wore this and everyone asked where I got it
 
-### Nümunə 3 — FitBox
+### Example 3 — FitBox
 
-**Giriş**
+**Input**
 
-- Biznes: `FitBox`
-- Məhsul/xidmət: `Həftəlik sağlam yemək abunəliyi`
+- Business: `FitBox`
+- Product/service: `Weekly healthy meal subscription`
 
 **Instagram**
 
-> “Bu gün nə yeyim?” sualı artıq vaxtını almasın 🥗 FitBox həftəlik menyunu
-> sənin üçün planlayır: rəngli tərəvəzlər, doyumlu porsiyalar və qapağı açılan
-> kimi iştaha gətirən təzə dadlar 🌱 Həm iş günündə enerjini qoruyursan, həm də
-> mətbəxdə saatlarla qalmaq əvəzinə özünə vaxt ayırırsan ⏳💚 Növbəti həftəni
-> daha rahat yaşamaq istəyirsənsə, menyuya bir göz gəzdir.
+> Let “What should I eat today?” stop taking up your time 🥗 FitBox plans your
+> weekly menu with colorful vegetables, satisfying portions, and fresh flavors
+> that spark your appetite the moment you lift the lid 🌱 You keep your energy
+> steady through the workday and make more time for yourself instead of spending
+> hours in the kitchen ⏳💚 Take a look at the menu and make next week easier.
 >
-> #SağlamQidalanma #FitBox #MealPrep #BakıYeməkləri #HealthyLifestyle
-> #GündəlikEnerji #FoodInspiration
+> #HealthyEating #FitBox #MealPrep #FreshMeals #HealthyLifestyle #DailyEnergy
+> #FoodInspiration
 
 **Facebook**
 
-> Həftənin daha yüngül keçməsi hazır yeməkdən əvvəl hazır qərarla başlayır.
+> A lighter week begins with a ready decision before it begins with a ready meal.
 >
-> Soyuducunu açanda səni rəngli, təzə və balanslı yeməklərin qarşıladığını
-> təsəvvür et. Vaxtın özünə qalır, gün ərzində enerjin sabit olur və hər
-> porsiyada həm doyum, həm də rahatlıq hiss edirsən. Təzə göyərtinin ətri,
-> rəngli tərəvəzlərin xırtıltısı və əvvəlcədən düşünülmüş porsiyalar nahar
-> fasiləsini günün ən rahat hissəsinə çevirir. Axşam plan qurmağa daha çox
-> vaxtın qalır, səhər isə günün yeməyi artıq hazır olur. FitBox planlı
-> qidalanmanı gündəlik həyatına qatan insanların həftəlik seçiminə çevrilib;
-> yeni menyular hər həftə daha çox masada öz yerini tapır. Hər qutu günün
-> ritmini daha rahat saxlayır.
+> Imagine opening the refrigerator to colorful, fresh, and balanced meals. Your
+> time stays yours, your energy remains steady throughout the day, and every
+> portion brings satisfaction and ease. The aroma of fresh herbs, the crunch of
+> colorful vegetables, and thoughtfully planned portions turn lunch into the
+> calmest part of your day. You have more time for evening plans, while the next
+> day's meal is already waiting in the morning. FitBox has become the weekly
+> choice for people making planned nutrition part of everyday life. Every box
+> keeps the rhythm of your day running smoothly.
 >
-> Həftəlik menyunu indi seç.
+> Choose your weekly menu now.
 
 **TikTok**
 
-> Bu qutular həftəmi gözlənilmədən xilas etdi
+> These boxes unexpectedly saved my entire week
 
-## Təhlükəsizlik
+## Security
 
-- API açarı yalnız environment dəyişənindən oxunur.
-- `.env` faylı `.gitignore` daxilindədir.
-- Sorğu gövdəsi Pydantic ilə yoxlanılır və artıq sahələr qəbul edilmir.
-- İstifadəçi məlumatları `textContent` ilə göstərilir; model cavabları HTML
-  kimi icra edilmir.
-- Tarixçə yalnız cari brauzer səhifəsinin yaddaşındadır və səhifə
-  yeniləndikdə silinir.
+- The API key is read only from an environment variable.
+- The `.env` file is included in `.gitignore`.
+- Pydantic validates the request body and rejects unexpected fields.
+- User input is rendered with `textContent`; model responses are never executed
+  as HTML.
+- History is stored only in the current browser page's memory and is deleted
+  when the page is refreshed.
 
-## Müəllif
+## Author
 
 **Fidan** — [GitHub: @Fidan6557](https://github.com/Fidan6557)

@@ -1,14 +1,4 @@
-def language_instruction(language: str) -> str:
-    if language == "az":
-        return (
-            "\n\nCRITICAL LANGUAGE REQUIREMENT:\n"
-            "Write exclusively in flawless, natural Azerbaijani. "
-            "Do not use Turkish words or Turkish grammar structures. "
-            "Use 'ilə', not 'ile' or 'yla/ylə'; 'deyil', not 'değil'; "
-            "'çünki', not 'çünkü'; and 'həm...həm də', not 'hem...hem de'. "
-            "Avoid words that exist in Turkish but not in Azerbaijani. "
-            "Write like a real person speaks, never formally or robotically."
-        )
+def language_instruction() -> str:
     return (
         "\n\nCRITICAL LANGUAGE REQUIREMENT:\n"
         "Write exclusively in natural, fluent English. "
@@ -17,14 +7,7 @@ def language_instruction(language: str) -> str:
     )
 
 
-def facebook_language_examples(language: str) -> str:
-    if language == "az":
-        return (
-            '- Keep every sentence affirmative and desire-led; no negative framing\n'
-            '- Avoid words like "yox", "deyil", "istəmir", "qaçırma", or "gecikmə"\n'
-            '- Replace pressure-based FOMO with positive social proof:\n'
-            '  "Bu yazın ən gözəl seçimi artıq burada."'
-        )
+def facebook_language_examples() -> str:
     return (
         "- Keep every sentence affirmative and desire-led; no negative framing\n"
         '- Avoid words like "not", "never", "don\'t", "miss out", or "too late"\n'
@@ -33,13 +16,7 @@ def facebook_language_examples(language: str) -> str:
     )
 
 
-def tiktok_format_examples(language: str) -> str:
-    if language == "az":
-        return (
-            '  * POV hekayəsi: "POV: bu paltarı geyindim və..."\n'
-            '  * Şok etiraf: "Bunu geyindim, heç kim məni tanımadı"\n'
-            '  * Gözlənilməz nəticə: "Hamı məndən soruşdu haradan aldım"'
-        )
+def tiktok_format_examples() -> str:
     return (
         '  * POV story: "POV: I tried this and..."\n'
         '  * Shocking confession: "I wore this and nobody recognized me"\n'
@@ -47,9 +24,7 @@ def tiktok_format_examples(language: str) -> str:
     )
 
 
-def instagram_prompt(
-    business_name: str, product: str, language: str = "az"
-) -> tuple[str, str]:
+def instagram_prompt(business_name: str, product: str) -> tuple[str, str]:
     system = """You are an award-winning Instagram copywriter who has grown brands from 0 to 1M followers.
 You write captions that stop the scroll, spark emotion, and drive real engagement.
 Your style is warm, human, and culturally aware. You use emojis as punctuation, not decoration."""
@@ -67,12 +42,10 @@ Rules:
 - Do NOT use generic phrases like "Check this out!" or "Don't miss out!"
 - Make it feel like a real person wrote it, not a marketing bot"""
 
-    return system + language_instruction(language), user
+    return system + language_instruction(), user
 
 
-def facebook_prompt(
-    business_name: str, product: str, language: str = "az"
-) -> tuple[str, str]:
+def facebook_prompt(business_name: str, product: str) -> tuple[str, str]:
     system = """You are one of the world's best Facebook Ads copywriters.
 You have written ads that generated millions in revenue.
 You know that Facebook users are skeptical and distracted.
@@ -101,17 +74,15 @@ Rules:
 - Zero corporate language
 - Zero clichés ("Don't miss out", "Limited time", "Check this out")
 - No rhetorical questions
-{facebook_language_examples(language)}
+{facebook_language_examples()}
 - Write like a trusted friend who genuinely discovered something amazing
 - Sensory words: texture, feeling, smell, sound — make them FEEL it
 - Total length: 100-130 words"""
 
-    return system + language_instruction(language), user
+    return system + language_instruction(), user
 
 
-def tiktok_prompt(
-    business_name: str, product: str, language: str = "az"
-) -> tuple[str, str]:
+def tiktok_prompt(business_name: str, product: str) -> tuple[str, str]:
     system = """You are a TikTok viral content strategist who has created hooks that hit 10M+ views.
 You understand that TikTok users decide in 0.5 seconds whether to keep watching.
 You write hooks that trigger instant curiosity, controversy, or FOMO.
@@ -124,7 +95,7 @@ Rules:
 - Keep it concise enough to work as the first spoken line of a video
 - Must trigger instant "wait, what?" or "I need to know more" reaction
 - Formats that go viral:
-{tiktok_format_examples(language)}
+{tiktok_format_examples()}
   * Bold claim that feels almost unbelievable
 - No hashtags
 - No emojis
@@ -133,4 +104,4 @@ Rules:
 - Use natural, spoken language — how a real person talks
 - Output: just the hook, nothing else"""
 
-    return system + language_instruction(language), user
+    return system + language_instruction(), user
