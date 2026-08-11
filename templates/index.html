@@ -63,35 +63,6 @@
       font-weight: 500;
     }
 
-    .lang-switcher {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      background: #fdf8f6;
-      border: 0.5px solid #f0dde6;
-      border-radius: 100px;
-      padding: 3px;
-    }
-
-    .lang-btn {
-      font-size: 11px;
-      font-weight: 500;
-      font-family: 'Inter', sans-serif;
-      color: #b05080;
-      background: transparent;
-      border: none;
-      border-radius: 100px;
-      padding: 4px 12px;
-      cursor: pointer;
-      transition: all 0.15s;
-      letter-spacing: 0.05em;
-    }
-
-    .lang-btn.active {
-      background: #8b1a4a;
-      color: #ffffff;
-    }
-
     /* HERO */
     .hero {
       text-align: center;
@@ -394,39 +365,35 @@
       <div class="logo-icon">✦</div>
       AdGenius
     </div>
-    <div class="lang-switcher">
-      <button class="lang-btn active" id="lang-az" type="button" onclick="setLang('az')">AZ</button>
-      <button class="lang-btn" id="lang-en" type="button" onclick="setLang('en')">EN</button>
-    </div>
-    <div class="nav-pill" id="nav-pill">AI Reklam Generatoru</div>
+    <div class="nav-pill" id="nav-pill">AI Ad Generator</div>
   </nav>
 
   <div class="hero">
-    <h1 id="hero-title">Dönüşüm yaradan<br>reklamlar yaradın</h1>
-    <p id="hero-sub">Instagram, Facebook və TikTok üçün platformaya uyğun reklam mətnlərini saniyələr içində yaradın.</p>
+    <h1 id="hero-title">Create ads that<br>actually convert</h1>
+    <p id="hero-sub">Generate platform-perfect ad copy for Instagram, Facebook, and TikTok in seconds.</p>
   </div>
 
   <form class="form-wrap" id="ad-form">
     <div class="input-row">
       <div class="field">
-        <label for="biz" id="biz-label">Biznes adı</label>
-        <input id="biz" type="text" maxlength="120" placeholder="məs. Luna Coffee" autocomplete="organization" required>
+        <label for="biz" id="biz-label">Business name</label>
+        <input id="biz" type="text" maxlength="120" placeholder="e.g. Luna Coffee" autocomplete="organization" required>
       </div>
       <div class="field">
-        <label for="prod" id="prod-label">Məhsul / xidmət</label>
-        <input id="prod" type="text" maxlength="500" placeholder="məs. Oat milk latte" autocomplete="off" required>
+        <label for="prod" id="prod-label">Product / service</label>
+        <input id="prod" type="text" maxlength="500" placeholder="e.g. Oat milk latte" autocomplete="off" required>
       </div>
     </div>
     <button class="gen-btn" id="gen-btn" type="submit">
       <div class="spinner" id="spinner"></div>
       <i class="ti ti-wand" id="btn-icon"></i>
-      <span id="btn-text">Reklam yarat</span>
+      <span id="btn-text">Generate ads</span>
     </button>
     <div class="error-box" id="error-box" role="alert"></div>
   </form>
 
   <div class="results-wrap" id="results" aria-live="polite">
-    <div class="section-label" id="section-label">Yaradılmış reklamlarınız</div>
+    <div class="section-label" id="section-label">Your generated ads</div>
 
     <div class="result-card">
       <div class="result-header">
@@ -434,11 +401,11 @@
           <div class="platform-icon icon-ig">📸</div>
           <div>
             <div class="platform-name">Instagram</div>
-            <div class="platform-sub" id="ig-sub">Başlıq + hashtaglər</div>
+            <div class="platform-sub" id="ig-sub">Caption + hashtags</div>
           </div>
         </div>
         <button class="copy-btn" type="button" onclick="copyText('ig-text', this)">
-          <i class="ti ti-copy"></i> <span>Kopyala</span>
+          <i class="ti ti-copy"></i> <span>Copy</span>
         </button>
       </div>
       <div class="result-body" id="ig-text"></div>
@@ -450,11 +417,11 @@
           <div class="platform-icon icon-fb">👥</div>
           <div>
             <div class="platform-name">Facebook</div>
-            <div class="platform-sub" id="fb-sub">Reklam mətni + CTA</div>
+            <div class="platform-sub" id="fb-sub">Ad copy + CTA</div>
           </div>
         </div>
         <button class="copy-btn" type="button" onclick="copyText('fb-text', this)">
-          <i class="ti ti-copy"></i> <span>Kopyala</span>
+          <i class="ti ti-copy"></i> <span>Copy</span>
         </button>
       </div>
       <div class="result-body" id="fb-text"></div>
@@ -466,11 +433,11 @@
           <div class="platform-icon icon-tt">🎵</div>
           <div>
             <div class="platform-name">TikTok</div>
-            <div class="platform-sub" id="tt-sub">Viral hook cümləsi</div>
+            <div class="platform-sub" id="tt-sub">Viral hook</div>
           </div>
         </div>
         <button class="copy-btn" type="button" onclick="copyText('tt-text', this)">
-          <i class="ti ti-copy"></i> <span>Kopyala</span>
+          <i class="ti ti-copy"></i> <span>Copy</span>
         </button>
       </div>
       <div class="result-body" id="tt-text"></div>
@@ -478,11 +445,11 @@
 
     <button class="regen-btn" id="regen-btn" type="button" onclick="regenerate()" style="display:none">
       <i class="ti ti-refresh"></i>
-      <span id="regen-text">Yenidən yarat</span>
+      <span id="regen-text">Regenerate</span>
     </button>
 
     <div id="history-section" style="display:none; margin-top: 1.5rem;">
-      <div class="section-label" id="history-label">Son generasiyalar</div>
+      <div class="section-label" id="history-label">Recent generations</div>
       <div id="history-list" style="display:flex; flex-direction:column; gap:0.5rem; margin-top:0.5rem;"></div>
     </div>
   </div>
@@ -490,83 +457,17 @@
   <script>
     const form = document.getElementById('ad-form');
 
-    const translations = {
-      az: {
-        heroTitle: "Dönüşüm yaradan<br>reklamlar yaradın",
-        heroSub: "Instagram, Facebook və TikTok üçün platformaya uyğun reklam mətnlərini saniyələr içində yaradın.",
-        bizLabel: "Biznes adı",
-        bizPlaceholder: "məs. Luna Coffee",
-        prodLabel: "Məhsul / xidmət",
-        prodPlaceholder: "məs. Oat milk latte",
-        generateBtn: "Reklam yarat",
-        generatingBtn: "Yaradılır...",
-        sectionLabel: "Yaradılmış reklamlarınız",
-        igSub: "Başlıq + hashtaglər",
-        fbSub: "Reklam mətni + CTA",
-        ttSub: "Viral hook cümləsi",
-        copy: "Kopyala",
-        copied: "Kopyalandı",
-        errorEmpty: "Zəhmət olmasa hər iki sahəni doldurun.",
-        errorFail: "Xəta baş verdi. Yenidən cəhd edin.",
-        navPill: "AI Reklam Generatoru",
-        regenBtn: "Yenidən yarat",
-        historyLabel: "Son generasiyalar"
-      },
-      en: {
-        heroTitle: "Create ads that<br>actually convert",
-        heroSub: "Generate platform-perfect ad copy for Instagram, Facebook, and TikTok in seconds.",
-        bizLabel: "Business name",
-        bizPlaceholder: "e.g. Luna Coffee",
-        prodLabel: "Product / service",
-        prodPlaceholder: "e.g. Oat milk latte",
-        generateBtn: "Generate ads",
-        generatingBtn: "Generating...",
-        sectionLabel: "Your generated ads",
-        igSub: "Caption + hashtags",
-        fbSub: "Ad copy + CTA",
-        ttSub: "Viral hook",
-        copy: "Copy",
-        copied: "Copied",
-        errorEmpty: "Please fill in both fields before generating.",
-        errorFail: "Something went wrong. Please try again.",
-        navPill: "AI Ad Generator",
-        regenBtn: "Regenerate",
-        historyLabel: "Recent generations"
-      }
+    const uiText = {
+      generateBtn: "Generate ads",
+      generatingBtn: "Generating...",
+      copy: "Copy",
+      copied: "Copied",
+      errorEmpty: "Please fill in both fields before generating.",
+      errorFail: "Something went wrong. Please try again."
     };
 
-    let currentLang = 'az';
     let isGenerating = false;
     let history = [];
-
-    function setLang(lang) {
-      currentLang = lang;
-      const t = translations[lang];
-
-      document.documentElement.lang = lang;
-      document.getElementById('lang-az').classList.toggle('active', lang === 'az');
-      document.getElementById('lang-en').classList.toggle('active', lang === 'en');
-      document.getElementById('hero-title').innerHTML = t.heroTitle;
-      document.getElementById('hero-sub').textContent = t.heroSub;
-      document.getElementById('biz-label').textContent = t.bizLabel;
-      document.getElementById('biz').placeholder = t.bizPlaceholder;
-      document.getElementById('prod-label').textContent = t.prodLabel;
-      document.getElementById('prod').placeholder = t.prodPlaceholder;
-      document.getElementById('btn-text').textContent = isGenerating ? t.generatingBtn : t.generateBtn;
-      document.getElementById('section-label').textContent = t.sectionLabel;
-      document.getElementById('ig-sub').textContent = t.igSub;
-      document.getElementById('fb-sub').textContent = t.fbSub;
-      document.getElementById('tt-sub').textContent = t.ttSub;
-      document.getElementById('nav-pill').textContent = t.navPill;
-      document.getElementById('regen-text').textContent = t.regenBtn;
-      document.getElementById('history-label').textContent = t.historyLabel;
-
-      document.querySelectorAll('.copy-btn').forEach((btn) => {
-        if (!btn.classList.contains('copied')) {
-          btn.querySelector('span').textContent = t.copy;
-        }
-      });
-    }
 
     form.addEventListener('submit', generate);
 
@@ -585,7 +486,7 @@
       errBox.style.display = 'none';
 
       if (!biz || !prod) {
-        errBox.textContent = translations[currentLang].errorEmpty;
+        errBox.textContent = uiText.errorEmpty;
         errBox.style.display = 'block';
         return;
       }
@@ -595,7 +496,7 @@
       regenBtn.disabled = true;
       document.getElementById('spinner').style.display = 'block';
       document.getElementById('btn-icon').style.display = 'none';
-      document.getElementById('btn-text').textContent = translations[currentLang].generatingBtn;
+      document.getElementById('btn-text').textContent = uiText.generatingBtn;
 
       ['ig-text', 'fb-text', 'tt-text'].forEach((id) => {
         document.getElementById(id).innerHTML =
@@ -611,8 +512,7 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             business_name: biz,
-            product: prod,
-            language: currentLang
+            product: prod
           })
         });
 
@@ -624,7 +524,7 @@
         }
 
         if (!response.ok) {
-          throw new Error(translations[currentLang].errorFail);
+          throw new Error(uiText.errorFail);
         }
 
         document.getElementById('ig-text').textContent = data.instagram;
@@ -639,7 +539,7 @@
           data.tiktok
         );
       } catch (error) {
-        errBox.textContent = error.message || translations[currentLang].errorFail;
+        errBox.textContent = error.message || uiText.errorFail;
         errBox.style.display = 'block';
         results.style.display = 'none';
       } finally {
@@ -648,7 +548,7 @@
         regenBtn.disabled = false;
         document.getElementById('spinner').style.display = 'none';
         document.getElementById('btn-icon').style.display = '';
-        document.getElementById('btn-text').textContent = translations[currentLang].generateBtn;
+        document.getElementById('btn-text').textContent = uiText.generateBtn;
       }
     }
 
@@ -668,7 +568,7 @@
         ig,
         fb,
         tt,
-        time: new Date().toLocaleTimeString('az-AZ', {
+        time: new Date().toLocaleTimeString('en-US', {
           hour: '2-digit',
           minute: '2-digit'
         })
@@ -764,21 +664,20 @@
       try {
         await writeToClipboard(text);
         btn.innerHTML = '<i class="ti ti-check"></i> <span></span>';
-        btn.querySelector('span').textContent = translations[currentLang].copied;
+        btn.querySelector('span').textContent = uiText.copied;
         btn.classList.add('copied');
         setTimeout(() => {
           btn.innerHTML = '<i class="ti ti-copy"></i> <span></span>';
-          btn.querySelector('span').textContent = translations[currentLang].copy;
+          btn.querySelector('span').textContent = uiText.copy;
           btn.classList.remove('copied');
         }, 2000);
       } catch {
         const errBox = document.getElementById('error-box');
-        errBox.textContent = translations[currentLang].errorFail;
+        errBox.textContent = uiText.errorFail;
         errBox.style.display = 'block';
       }
     }
 
-    setLang('az');
   </script>
 </body>
 </html>

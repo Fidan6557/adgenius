@@ -2,8 +2,6 @@ import asyncio
 import logging
 import os
 from pathlib import Path
-from typing import Literal
-
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -49,7 +47,6 @@ class GenerateRequest(BaseModel):
 
     business_name: str = Field(min_length=1, max_length=120)
     product: str = Field(min_length=1, max_length=500)
-    language: Literal["az", "en"] = "az"
 
 
 class GenerateResponse(BaseModel):
@@ -104,13 +101,13 @@ async def generate_ads(payload: GenerateRequest) -> GenerateResponse:
     client = get_openai_client()
 
     instagram_system, instagram_user = instagram_prompt(
-        payload.business_name, payload.product, payload.language
+        payload.business_name, payload.product
     )
     facebook_system, facebook_user = facebook_prompt(
-        payload.business_name, payload.product, payload.language
+        payload.business_name, payload.product
     )
     tiktok_system, tiktok_user = tiktok_prompt(
-        payload.business_name, payload.product, payload.language
+        payload.business_name, payload.product
     )
 
     try:
