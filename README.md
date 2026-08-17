@@ -8,7 +8,7 @@ Facebook, and TikTok.
 
 [GitHub repository](https://github.com/Fidan6557/adgenius)
 
-[Live Demo](https://adgenius-production-0206.up.railway.app)
+
 
 ## Assignment requirements
 
